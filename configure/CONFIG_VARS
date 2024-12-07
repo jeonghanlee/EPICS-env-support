@@ -3,3 +3,4 @@ SRC_NAMES_VARS:=$(filter SRC_NAME_%, $(.VARIABLES))
 MOD_NAMES_VARS:=$(patsubst SRC_NAME_%,%, $(SRC_NAMES_VARS))
 
 SRC_NAMES:=$(foreach v, $(SRC_NAMES_VARS), $($(v)))
+MOD_NAMES:=$(SRC_NAMES)

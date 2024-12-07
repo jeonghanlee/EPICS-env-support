@@ -13,11 +13,19 @@ $(TOP)/configure/MODULESGEN.mk: $(TOP)/configure/RELEASE $(TOP)/configure/CONFIG
 	)
 	$(foreach v, \
 	    $(MOD_NAMES_VARS), \
+	    $(shell echo "INSTALL_LOCATION_$(v):=\$$(INSTALL_LOCATION_MODS)/$(strip $(SRC_NAME_$(v)))-$(SRC_VER_$(v))" >> $@) \
+	)
+	$(foreach v, \
+	    $(MOD_NAMES_VARS), \
     	$(shell echo "SRC_PATH_$(v):=$(SRC_NAME_$(v))-src" >> $@) \
     )
 #endif
 
 SRC_PATH_MODULES:=$(foreach v, $(filter-out %_BASE, $(filter SRC_PATH_%,$(.VARIABLES))), $($(v)))
+
+MODS_INSTALL_LOCATIONS_VARS:=$(filter-out %_EPICS %_ %_BASE %_MODS, $(filter INSTALL_LOCATION_%, $(.VARIABLES)))
+MODS_INSTALL_LOCATIONS:=$(foreach v, $(MODS_INSTALL_LOCATIONS_VARS), $($(v)))
+MODS_INSTALL_LOCATIONS_SYMLINKS:=$(foreach v, $(MOD_NAMES), $(addsuffix /$(v), $(INSTALL_LOCATION_MODS)))
 
 VARS_EXCLUDES+=SRC_PATH_MODS_INSTALL
 VARS_EXCLUDES+=SRC_PATH_MODS_BUILD

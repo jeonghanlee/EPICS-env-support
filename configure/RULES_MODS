@@ -38,9 +38,13 @@ distclean.modules:
  	done
 
 conf.modules:
-	@for mod in $(SRC_PATH_MODULES) ; do \
-		make -C "$$mod" conf ; \
-	done
+
+conf.ADCore:
+	@echo "CHECK_RELEASE = NO"                            > $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)" >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
+
+conf.ADCore.show:
+	cat -b  $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
 
 build.modules:
 	@for mod in $(SRC_PATH_MODULES) ; do \
