@@ -7,6 +7,12 @@ ADCore
 ADSimDetector
 ADViewers
 ```
+##
+
+```
+apt install libxml2-dev
+```
+
 
 ## How to 
 

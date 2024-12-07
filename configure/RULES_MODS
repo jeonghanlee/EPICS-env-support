@@ -37,18 +37,21 @@ distclean.modules:
 		rm -rf $$mod ; \
  	done
 
-conf.modules:
+conf.modules: conf.ADCore
 
 conf.ADCore:
-	@echo "CHECK_RELEASE = NO"                            > $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
-	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)" >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"               > $(TOP)/$(SRC_PATH_ADCORE)/configure/RELEASE.local
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"          >> $(TOP)/$(SRC_PATH_ADCORE)/configure/RELEASE.local
+	@echo "CHECK_RELEASE = NO"                               > $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"    >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`" >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
 
 conf.ADCore.show:
 	cat -b  $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
 
 build.modules:
 	@for mod in $(SRC_PATH_MODULES) ; do \
-		make -C "$$mod" ; \
+		make -C "$$mod"; \
 	done
 
 install.modules:
