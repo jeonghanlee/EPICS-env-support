@@ -1,0 +1,55 @@
+#
+.DEFAULT_GOAL := help
+
+.PHONY: help default init distclean deinit
+
+# # help is defined in 
+# # https://gist.github.com/rcmachado/af3db315e31383502660
+help:
+	$(info --------------------------------------- )	
+	$(info Make Targets)
+	$(info --------------------------------------- )
+	$(QUIET) awk '/^[a-zA-Z\-\_0-9]+:/ {            \
+	  nb = sub( /^## /, "", helpMsg );              \
+	  if(nb == 0) {                                 \
+	    helpMsg = $$0;                              \
+	    nb = sub( /^[^:]*:.* ## /, "", helpMsg );   \
+	  }                                             \
+	  if (nb)                                       \
+	    print  $$1 "\t" helpMsg;                    \
+	}                                               \
+	{ helpMsg = $$0 }'                              \
+	$(MAKEFILE_LIST) | column -ts:
+
+
+default: help
+
+.PHONY: init clone update deinit distclean
+
+## Clone Source
+init: clone
+
+# gitclone use '-C' option, so git version should be more than 1.8.5. CentOS7 git is imcompatiable.
+#
+clone: clone.modules
+
+conf: conf.release conf.modules
+
+conf.release: 
+	echo "EPICS_BASE=$(INSTALL_LOCATION)" > $(TOP)/RELEASE.local
+
+deinit: distclean
+
+## Clean Source
+distclean: distclean.modules
+	-rm -f $(TOP)/*.local
+	-rm -f $(TOP)/configure/*.local
+
+deinit: distclean
+
+build: conf build.modules install.modules symlink.modules
+
+
+
+
+

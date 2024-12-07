@@ -1,0 +1,22 @@
+
+## Where the Source repository SRC_URL/SRC_NAME
+#SRC_URL_BASE:=https://github.com/epics-base 
+SRC_URL:=https://github.com/areaDetector
+
+# 2024-12-01
+SRC_NAME_ADCORE:=ADCore
+SRC_TAG_ADCORE:=R3-14
+SRC_VER_ADCORE:=$(SRC_TAG_ADCORE)
+
+# 2024-04-07
+SRC_NAME_ADSIMDETECTOR:=ADSimDetector
+SRC_TAG_ADSIMDETECTOR:=R2-11
+SRC_VER_ADSIMDETECTOR:=$(SRC_TAG_ADSIMDETECTOR)
+
+# 2021-05-26
+SRC_NAME_ADVIEWERS:=ADViewers
+SRC_TAG_ADVIEWERS:=R1-7
+SRC_VER_ADVIEWERS:=$(SRC_TAG_ADVIEWERS)
+
+-include $(TOP)/../RELEASE.local
+-include $(TOP)/configure/RELEASE.local
