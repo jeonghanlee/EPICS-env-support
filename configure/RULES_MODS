@@ -35,32 +35,8 @@ $(MOD_NAMES_VARS):
 distclean.modules: 
 	@for mod in $(SRC_PATH_MODULES) ; do \
 		rm -rf $$mod ; \
- 	done
-
-conf.modules: conf.ADCore
-
-conf.ADCore:
-	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"               > $(TOP)/$(SRC_PATH_ADCORE)/configure/RELEASE.local
-	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"          >> $(TOP)/$(SRC_PATH_ADCORE)/configure/RELEASE.local
-	@echo "CHECK_RELEASE = NO"                               > $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
-	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"    >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
-	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`" >> $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE
-
-conf.ADCore.show:
-	cat -b  $(TOP)/$(SRC_PATH_ADCORE)/configure/CONFIG_SITE.local
-
-build.modules:
-	@for mod in $(SRC_PATH_MODULES) ; do \
-		make -C "$$mod"; \
 	done
 
-install.modules:
-	@for mod in $(SRC_PATH_MODULES) ; do \
-		make -C "$$mod" install; \
-	done
-
-symlink.modules:
-	@for mod in $(SRC_PATH_MODULES) ; do \
-		make -C "$$mod" symlink; \
-	done
+include $(TOP)/configure/RULES_MODS_CONFIG
+include $(TOP)/configure/RULES_MODS_BUILD
 

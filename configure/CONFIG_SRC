@@ -5,7 +5,7 @@ INSTALL_PROGRAM:=$(INSTALL)
 INSTALL_DATA:=$(INSTALL) -m 644
 INSTALL_755:=$(INSTALL) -m 755
 
-# IF INSTALL_LOCATIOIN/.. is not WRITABLE, SUDO and SUDOBASH should be used 
+# IF INSTALL_LOCATIOIN/.. is not WRITABLE, SUDO and SUDOBASH should be used
 # SUDO_INFO 1 : SUDO is needed (NOT writable)
 # SUDO_INFO 0 : SUDO is not needed
 # There is no simple way to detect whether SUDO is needed to create INSTALL_LOCATION"
@@ -25,13 +25,12 @@ SUDO_CMD := $(shell which sudo)
 #
 ifeq "$(SUDO_INFO)" "1"
 SUDO = $(SUDO_CMD)
-else
-ifeq ($(UNAME_S),Darwin)
-SUDO = $(SUDO_CMD)
+SUDOBASH := $(SUDO) -E bash -c
 else
 SUDO :=
+SUDOBASH = bash -c
 endif
-endif
+
 
 
 ifeq ($(UNAME_S),Darwin)
@@ -48,7 +47,6 @@ OS_VERSION:=unknownOS
 endif
 
 PATH_NANE_MODULES:=modules
-
 INSTALL_LOCATION_MODS:=$(INSTALL_LOCATION)/../$(PATH_NANE_MODULES)
 
 VARS_EXCLUDES+=SRC_PATH_INFO

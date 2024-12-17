@@ -1,0 +1,13 @@
+MODS_CLEAN_RULES:=
+MODS_INSTALL_RULES:=
+MODS_UNINSTALL_RULES:=
+MODS_BUILD_RULES:=
+MODS_SYMLINKS_RULES:=
+MODS_CLEANSYMLINKS_RULES:=
+
+# We assume that we have the ALS-U EPICS environment already.
+ADCore_DEPS:=
+ADSimDetector_DEPS:= build.ADCore
+ADGenICam_DEPS:= build.ADCore
+ADVimba_DEPS:= build.ADCore build.ADGenICam
+

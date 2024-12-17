@@ -1,0 +1,53 @@
+#
+conf.modules: $(patsubst %, conf.%, $(SRC_NAMES))
+conf.modules.show: $(patsubst %, conf.%.show, $(SRC_NAMES))
+
+conf.ADCore:
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"               >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "CHECK_RELEASE = NO"                                 > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADCore.show:
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADSimDetector: patch.ADSimDetector
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                      > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                 >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "CHECK_RELEASE = NO"                                   > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADSIMDETECTOR)" >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+patch.ADSimDetector:
+	@sed -i "s@ADApp@cfg@g" $(TOP)/$(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))/simDetectorApp/src/Makefile
+#	@echo $(patsubst patch.%, %, $@)
+#	@echo $(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))
+
+conf.ADSimDetector.show:
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADGenICam:
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"               >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "CHECK_RELEASE = NO"                                 > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`" >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADGenICam.show:
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADVimba:
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"               >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "CHECK_RELEASE = NO"                                 > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`" >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
+conf.ADVimba.show:
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
