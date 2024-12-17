@@ -3,13 +3,23 @@ RULES_VARS+=$(foreach v, $(filter %_RULES_NAMES,$(.VARIABLES)), $(v))
 
 VARS_EXCLUDES+=.SHELLSTATUS
 VARS_EXCLUDES+=INIT_SRC
-VARS_EXCLUDES+=SITE_SPECIFIC_FILES_PATH
-VARS_EXCLUDES+=MODS_ONE_%
-VARS_EXCLUDES+=MODS_ZERO_%
-VARS_EXCLUDES+=%_RULES
-VARS_EXCLUDES+=%_VARS
-VARS_EXCLUDES+=%_DEPS
-VARS_EXCLUDES+=list_distclean
+VARS_EXCLUDES+=FILTER
+VARS_EXCLUDES+=LEVEL
+VARS_EXCLUDES+=$(filter %_VARS, $(.VARIABLES))
+VARS_EXCLUDES+=$(filter JAR_%, $(.VARIABLES))
+VARS_EXCLUDES+=$(filter %_BUILDER, $(.VARIABLES))
+VARS_EXCLUDES+=$(RULES_VARS)
+VARS_EXCLUDES+=RULES_VARS
+VARS_EXCLUDES+=%_BUILDER
+VARS_EXCLUDES+=LSOPTS
+VARS_EXCLUDES+=UNAME_%
+VARS_EXCLUDES+=install
+VARS_EXCLUDES+=clean
+VARS_EXCLUDES+=echo
+VARS_EXCLUDES+=$(filter -%, $(.VARIABLES))
+VARS_EXCLUDES+=$(filter "%, $(.VARIABLES))
+VARS_EXCLUDES+=$(filter @%, $(.VARIABLES))
+VARS_EXCLUDES+=LSOPTS
 
 
 LEVEL?=1
@@ -56,9 +66,9 @@ FORCE:
 
 exist:
 ifeq (, $(shell which tree))
-	$(if $(wildcard $(INSTALL_LOCATION)), @ ls -d $(INSTALL_LOCATION) && find $(INSTALL_LOCATION)/ -maxdepth $(LEVEL) | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/:---\1/")
+	$(if $(wildcard $(INSTALL_LOCATION_MODS)), @ ls -d $(INSTALL_LOCATION_MODS) && find $(INSTALL_LOCATION_MODS)/ -maxdepth $(LEVEL) | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/:---\1/")
 else
-	$(if $(wildcard $(INSTALL_LOCATION)), tree -aL $(LEVEL) $(INSTALL_LOCATION), $(QUIET)echo "No $(INSTALL_LOCATION)")
+	$(if $(wildcard $(INSTALL_LOCATION_MODS)), tree -aL $(LEVEL) $(INSTALL_LOCATION_MODS), $(QUIET)echo "No $(INSTALL_LOCATION_MODS)")
 endif
 
 
