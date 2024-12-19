@@ -21,7 +21,6 @@ echo "INSTALL_LOCATION=/home/jeonglee/epics/1.1.0/debian-12/7.0.7/base" > config
 make init
 make conf
 make build
-make install
 make symlinks
 ```
 

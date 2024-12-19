@@ -47,12 +47,12 @@ conf.ADGenICam.show:
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
 conf.ADVimba: patch.ADVimba
-	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                       > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
-	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
-	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
-	@echo "ADGENICAM:=$(INSTALL_LOCATION_ADGENICAM)"             >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                       > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
+	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
+	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
+	@echo "ADGENICAM:=$(INSTALL_LOCATION_ADGENICAM)"             >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
 	@echo "CHECK_RELEASE = NO"                                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
-	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADGENICAM)"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADVIMBA)"        >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 #	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
 patch.ADVimba:
@@ -61,6 +61,6 @@ patch.ADVimba:
 #	@echo $(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))
 
 conf.ADVimba.show:
-	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
