@@ -10,6 +10,8 @@ conf.ADCore:
 	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
 conf.ADCore.show:
+	@echo ""
+	@echo ">>>>>>> conf.show $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))"
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
@@ -26,6 +28,8 @@ patch.ADSimDetector:
 #	@echo $(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))
 
 conf.ADSimDetector.show:
+	@echo ""
+	@echo ">>>>>>> conf.show $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))"
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
@@ -43,6 +47,8 @@ patch.ADGenICam:
 #	@echo $(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))
 
 conf.ADGenICam.show:
+	@echo ""
+	@echo ">>>>>>> conf.show $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))"
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
@@ -61,6 +67,8 @@ patch.ADVimba:
 #	@echo $(filter $(patsubst patch.%, %, $@)-src, $(SRC_PATH_MODULES))
 
 conf.ADVimba.show:
+	@echo ""
+	@echo ">>>>>>> conf.show $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))"
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
 	cat -b  $(TOP)/$(filter $(patsubst conf.%.show, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
