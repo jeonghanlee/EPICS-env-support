@@ -16,6 +16,8 @@ clone: clone.modules
 
 conf: conf.modules
 
+conf.gz: conf.gz.modules
+
 conf.show: conf.modules.show
 
 deinit: distclean
@@ -28,6 +30,8 @@ distclean: distclean.modules
 deinit: distclean
 
 build: conf build.modules
+
+build.gz: conf.gz build.modules
 
 distclean: distclean.modules distclean.modulesgen
 
