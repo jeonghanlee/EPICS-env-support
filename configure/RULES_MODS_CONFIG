@@ -7,8 +7,21 @@ conf.ADCore:
 	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                     > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "CHECK_RELEASE = NO"                                  > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_PVA = YES"                                     >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_QSRV = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_JASON = YES"                                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_HDF5 = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+#	@echo "HDF5_EXTERNAL = YES"                                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_JPEG = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+#	@echo "JPEG_EXTERNAL = YES"                                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_ZLIB = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+#	@echo "ZLIB_EXTERNAL = YES"                                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"       >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
-	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS += `pkg-config --cflags libxml-2.0`"   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_CPPFLAGS += `pkg-config --cflags hdf5`"         >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_LDFLAGS += `pkg-config --libs libxml-2.0`"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "USR_LDFLAGS += `pkg-config --libs hdf5`"            >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+
 
 conf.gz.ADCore: conf.ADCore
 	$(QUIET)echo "USR_CFLAGS   += -g0 -gz=zlib" >> $(TOP)/$(filter $(patsubst conf.gz.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE

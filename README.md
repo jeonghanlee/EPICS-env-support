@@ -10,7 +10,8 @@ Only the following Linux System Packages are used. I don't use the `ADSupport`.
 The following packages will be updated according to our application requirements.
 
 ```
-apt install libxml2-dev
+apt install libxml2-dev libhdf5-dev libjpeg-dev libtiff-dev libz-dev libusb-1.0-0-dev
+
 ```
 
 
