@@ -1,0 +1,18 @@
+# Set RPATH when linking executables and libraries.
+LINKER_USE_RPATH:=ORIGIN
+# Only used when LINKER_USE_RPATH=ORIGIN
+# The build time root(s) of the relocatable tree (separate multiple w/ ':').
+# Linking to libraries under any root directory will be relative.
+# Linking to libraries outside of this root will be absolute.
+# All root directories are considered to be the same.
+#
+# INSTALL_LOCATION in EPICS-env-support
+# is INSTALL_LOCATION_BASE in EPICS-env
+# for example, /home/jeonglee/epics/1.1.1/debian-12/7.0.7/base
+# So, we have to define ORIGIN as
+# INSTALL_LOCATION_EPICS in EPICS-env
+# for example, /home/jeonglee/epics/1.1.1/debian-12/7.0.7.
+# to find base and modules library conistently.
+INSTALL_LOCATION_EPICS:=$(INSTALL_LOCATION)/..
+#
+#LINKER_ORIGIN_ROOT:=$(INSTALL_LOCATION_EPICS)

@@ -18,7 +18,7 @@ apt install libxml2-dev libhdf5-dev libjpeg-dev libtiff-dev libz-dev libusb-1.0-
 ## How to install
 
 ```
-echo "INSTALL_LOCATION=/home/jeonglee/epics/1.1.0/debian-12/7.0.7/base" > configure/CONFIG_SITE.local
+echo "INSTALL_LOCATION=/home/jeonglee/epics/1.1.1/debian-12/7.0.7/base" > configure/CONFIG_SITE.local
 make init
 make conf
 make build
