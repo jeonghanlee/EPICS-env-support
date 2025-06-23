@@ -6,6 +6,7 @@ MODS_SYMLINKS_RULES:=
 MODS_CLEANSYMLINKS_RULES:=
 MODS_READELF_RULES:=
 MODS_LDD_RULES:=
+MODS_CHRPATH_RULES:=
 
 # We assume that we have the ALS-U EPICS environment already.
 ADCore_DEPS:=

@@ -6,6 +6,14 @@
 ## #include "snl.h"
 ##          ^~~~~~~
 
+## How to expand hidden rules for modules
+## 1. Add XXX_rule_BUILDER and XXX_BUILDER in RULES_FUNC
+## 2. Define MODS_XXX_RULES in CONFIG_MODS_DEPS
+## 3. Add XXX_BUILDER into $(call)
+## 4. Add MODS_DEFAULT_XXX_RULES
+## 5. Add XXX.modules: $(MODS_DEFAULT_XXX_RULES)
+##
+
 $(call rules_BUILDER,$(SRC_PATH_MODULES),distclean,MODS_CLEAN_RULES)
 $(call rules_BUILDER,$(SRC_PATH_MODULES),install,MODS_INSTALL_RULES)
 $(call rules_BUILDER,$(SRC_PATH_MODULES),uninstall,MODS_UNINSTALL_RULES)
@@ -14,6 +22,7 @@ $(call clean_symlinks_BUILDER,$(SRC_PATH_MODULES),MODS_CLEANSYMLINKS_RULES)
 $(call buildrules_BUILDER,$(SRC_PATH_MODULES),MODS_BUILD_RULES)
 $(call readelf_BUILDER,$(SRC_PATH_MODULES),MODS_READELF_RULES)
 $(call ldd_BUILDER,$(SRC_PATH_MODULES),MODS_LDD_RULES)
+$(call chrpath_BUILDER,$(SRC_PATH_MODULES),MODS_CHRPATH_RULES)
 
 MODS_DEFAULT_EXCLUDES_RULES:=
 
@@ -25,9 +34,9 @@ MODS_DEFAULT_SYMLINKS_RULES=$(filter-out $(foreach a,$(MODS_DEFAULT_EXCLUDES_RUL
 MODS_DEFAULT_CLEANSYMLINKS_RULES=$(filter-out $(foreach a,$(MODS_DEFAULT_EXCLUDES_RULES),%.$a),$(MODS_CLEANSYMLINKS_RULES))
 MODS_DEFAULT_READELF_RULES=$(filter-out $(foreach a,$(MODS_DEFAULT_EXCLUDES_RULES),%.$a),$(MODS_READELF_RULES))
 MODS_DEFAULT_LDD_RULES=$(filter-out $(foreach a,$(MODS_DEFAULT_EXCLUDES_RULES),%.$a),$(MODS_LDD_RULES))
+MODS_DEFAULT_CHRPATH_RULES=$(filter-out $(foreach a,$(MODS_DEFAULT_EXCLUDES_RULES),%.$a),$(MODS_CHRPATH_RULES))
 
 .PHONY: build.modules clean.modules install.modules uninstall.modules
-
 
 ## EPICS build includes build and install together
 build.modules: $(MODS_DEFAULT_BUILD_RULES) install.modules
@@ -38,24 +47,23 @@ clean.modules: $(MODS_DEFAULT_CLEAN_RULES)
 
 ## It may not be necessary to call this function usually.
 install.modules: $(MODS_DEFAULT_INSTALL_RULES)
-
 ##
 uninstall.modules: $(MODS_DEFAULT_UNINSTALL_RULES) remove.modules
-
+#
 remove.modules:
 	@for mod in $(MODS_INSTALL_LOCATIONS) ; do \
 	    $(SUDO) rm -rf $$mod; \
 	done
-
+#
 # Create/Overwrite symbolic links of all modules defined in configuration
 # Delete all dead links in INSTALL_LOCATION_MODS (This doesn't work macOS)
 symlinks.modules: $(MODS_DEFAULT_SYMLINKS_RULES)
 ifeq ($(UNAME_S),Linux)
 	@$(SUDO) find $(INSTALL_LOCATION_MODS) -xtype l -delete
 endif
-
-
+#
 readelf.modules: $(MODS_DEFAULT_READELF_RULES)
-
+#
 ldd.modules: $(MODS_DEFAULT_LDD_RULES)
 #
+chrpath.modules: $(MODS_DEFAULT_CHRPATH_RULES)
