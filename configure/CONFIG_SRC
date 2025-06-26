@@ -10,15 +10,8 @@ INSTALL_755:=$(INSTALL) -m 755
 # IF INSTALL_LOCATIOIN/.. is not WRITABLE, SUDO and SUDOBASH should be used
 # SUDO_INFO 1 : SUDO is needed (NOT writable)
 # SUDO_INFO 0 : SUDO is not needed
-# There is no simple way to detect whether SUDO is needed to create INSTALL_LOCATION"
-# test -w $(INSTALL_LOCATION) is wrong, if the directory doesn't exsit.
-# So, test -w $(INSTALL_LOCATION)/.. is a bit better solution.
-# There is only one exception when INSTALL_LOCATION = HOME.
-ifeq "$(INSTALL_LOCATION)" "${HOME}"
-SUDO_INFO := $(shell test -w $(INSTALL_LOCATION) 1>&2 2> /dev/null; echo $$?)
-else
-SUDO_INFO := $(shell test -w $(INSTALL_LOCATION)/.. 1>&2 2> /dev/null; echo $$?)
-endif
+
+SUDO_INFO = $(shell test -w $(INSTALL_LOCATION_EPICS) 1>&2 2> /dev/null; echo $$?)
 
 SUDO_CMD := $(shell which sudo)
 
@@ -53,6 +46,10 @@ endif
 
 PATH_NANE_MODULES:=modules
 INSTALL_LOCATION_MODS:=$(INSTALL_LOCATION)/../$(PATH_NANE_MODULES)
+
+# INSTALL_LOCATION in EPICS-env-support is INSTALL_LOCATION_BASE in EPICS-env
+DO_MAKE=make LINKER_USE_RPATH=$(LINKER_USE_RPATH) LINKER_ORIGIN_ROOT="$(INSTALL_LOCATION_EPICS)"
+
 
 VARS_EXCLUDES+=SRC_PATH_INFO
 VARS_EXCLUDES+=INSTALL
