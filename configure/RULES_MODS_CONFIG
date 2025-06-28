@@ -19,7 +19,7 @@ conf.ADCore:
 	@echo "USR_LDFLAGS += `pkg-config --libs libxml-2.0`"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "USR_CPPFLAGS += `pkg-config --cflags libxml-2.0`"   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADCORE)"       >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
-ifeq ($(OS_NAME),debian)
+ifeq ($(OS_NAME), $(filter $(OS_NAME), debian ubuntu)
 	@echo "USR_CPPFLAGS += `pkg-config --cflags hdf5`"         >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "USR_LDFLAGS += `pkg-config --libs hdf5`"            >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 endif
