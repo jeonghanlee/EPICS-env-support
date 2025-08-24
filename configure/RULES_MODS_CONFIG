@@ -7,6 +7,7 @@ conf.ADCore:
 	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                     > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "CHECK_RELEASE = NO"                                  > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "PROD_LDFLAGS += -Wl,--enable-new-dtags"             >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_PVA = YES"                                     >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_QSRV = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_JASON = YES"                                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
@@ -40,6 +41,7 @@ conf.ADSimDetector: patch.ADSimDetector
 	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                 >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "CHECK_RELEASE = NO"                                   > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "PROD_LDFLAGS += -Wl,--enable-new-dtags"              >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADSIMDETECTOR)" >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
 conf.gz.ADSimDetector: conf.ADSimDetector
@@ -64,6 +66,7 @@ conf.ADGenICam: patch.ADGenICam
 	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                  >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "CHECK_RELEASE = NO"                                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "PROD_LDFLAGS += -Wl,--enable-new-dtags"               >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADGENICAM)"      >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 #	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
@@ -89,6 +92,7 @@ conf.ADVimba: patch.ADVimba
 	@echo "ADCORE:=$(INSTALL_LOCATION_ADCORE)"                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
 	@echo "ADGENICAM:=$(INSTALL_LOCATION_ADGENICAM)"             >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE
 	@echo "CHECK_RELEASE = NO"                                    > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "PROD_LDFLAGS += -Wl,--enable-new-dtags"               >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "INSTALL_LOCATION:=$(INSTALL_LOCATION_ADVIMBA)"        >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 #	@echo "USR_CPPFLAGS  += `pkg-config --cflags libxml-2.0`"    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 
