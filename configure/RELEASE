@@ -5,7 +5,7 @@ SRC_URL:=https://github.com/areaDetector
 
 # 2024-12-01
 SRC_NAME_ADCORE:=ADCore
-SRC_TAG_ADCORE:=R3-14
+SRC_TAG_ADCORE:=99fa6bf
 SRC_VER_ADCORE:=$(SRC_TAG_ADCORE)
 
 # 2024-04-07
