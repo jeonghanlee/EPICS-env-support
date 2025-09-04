@@ -1,8 +1,9 @@
 
 ## Where the Source repository SRC_URL/SRC_NAME
-#SRC_URL_BASE:=https://github.com/epics-base 
+#SRC_URL_BASE:=https://github.com/epics-base
 SRC_URL:=https://github.com/areaDetector
 
+# https://github.com/areaDetector/ADCore
 # 2024-12-01
 SRC_NAME_ADCORE:=ADCore
 SRC_TAG_ADCORE:=R3-14
@@ -13,11 +14,13 @@ SRC_NAME_ADSIMDETECTOR:=ADSimDetector
 SRC_TAG_ADSIMDETECTOR:=R2-11
 SRC_VER_ADSIMDETECTOR:=$(SRC_TAG_ADSIMDETECTOR)
 
+# https://github.com/areaDetector/ADGenICam
 # 2024-07-26
 SRC_NAME_ADGENICAM:=ADGenICam
 SRC_TAG_ADGENICAM:=R1-10
 SRC_VER_ADGENICAM:=$(SRC_TAG_ADGENICAM)
 
+# https://github.com/areaDetector/ADVimba
 # 2024-12-01
 SRC_NAME_ADVIMBA:=ADVimba
 SRC_TAG_ADVIMBA:=R1-5
