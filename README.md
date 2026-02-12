@@ -33,3 +33,16 @@ ADSimDetector
 ADGenICam
 ADVimba
 ```
+
+## How to install with EPICS-env
+
+```
+source ~/epics-1.2.0/1.2.0/debian-13/7.0.10/setEpicsEnv.bash
+make conf.base
+make init
+make conf
+make build
+make symlinks
+```
+
+

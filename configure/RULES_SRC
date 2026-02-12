@@ -40,5 +40,16 @@ distclean.modulesgen:
 
 symlinks: symlinks.modules
 
+.PHONY: conf.base
+
+# Check if EPICS_BASE is defined and non-empty.
+# This make configuration quick for the integration testing with EPICS-env revision
+ifneq ($(strip $(EPICS_BASE)),)
+conf.base:
+	@printf "Configuring INSTALL_LOCATION to %s\n" "$(EPICS_BASE)"
+	$(RM) $(TOP)/configure/CONFIG_SITE.local
+	printf "INSTALL_LOCATION=%s\n" "$(EPICS_BASE)" > $(TOP)/configure/CONFIG_SITE.local
+endif
+
 null:
 	@echo ""
