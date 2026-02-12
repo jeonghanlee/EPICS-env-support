@@ -1,43 +1,40 @@
 # AreaDetector Modules Configuration for EPICS-env
 
-In order to use this repository, one must setup the EPICS environment according to the following site.
+This repository configures and builds AreaDetector modules.
+It is designed to work seamlessly with [EPICS-env](https://github.com/jeonghanlee/EPICS-env).
 
-https://github.com/jeonghanlee/EPICS-env
+## Modules
 
-## Packages
+The following modules will be installed:
 
-Only the following Linux System Packages are used. I don't use the `ADSupport`.
-The following packages will be updated according to our application requirements.
+* ADCore
+* ADSimDetector
+* ADGenICam
+* ADVimba
 
-```
-apt install libxml2-dev libhdf5-dev libjpeg-dev libtiff-dev libz-dev libusb-1.0-0-dev
+## System Requirements
 
-```
+This configuration manages dependencies via system packages and does not use `ADSupport`.
 
+**Required Linux Packages:**
 
-## How to install
-
-```
-echo "INSTALL_LOCATION=/home/jeonglee/epics/1.1.1/debian-12/7.0.7/base" > configure/CONFIG_SITE.local
-make init
-make conf
-make build
-make symlinks
+```bash
+# Install dependencies
+sudo apt install libxml2-dev libhdf5-dev libjpeg-dev libtiff-dev libz-dev libusb-1.0-0-dev
 ```
 
-## The follow modules will be installed within EPICS-env
+## Installation
 
-```
-ADCore
-ADSimDetector
-ADGenICam
-ADVimba
-```
+### Option 1: Using EPICS-env (Recommended)
 
-## How to install with EPICS-env
+If `EPICS-env` is set up, `EPICS_BASE` is used to configure `CONFIG_SITE.local`.
+**Note:** `make conf.base` must be executed first to generate the configuration file before initialization.
 
-```
-source ~/epics-1.2.0/1.2.0/debian-13/7.0.10/setEpicsEnv.bash
+```bash
+# 1. Source the EPICS environment
+source <path_to_epics_version>/setEpicsEnv.bash
+
+# 2. Configure and Build
 make conf.base
 make init
 make conf
@@ -45,4 +42,18 @@ make build
 make symlinks
 ```
 
+### Option 2: Manual Configuration
 
+If not using `EPICS-env`, `INSTALL_LOCATION` must be defined manually.
+
+```bash
+# 1. Configure the installation location
+# Replace <absolute_path_to_epics_base> with the actual path.
+echo "INSTALL_LOCATION=<absolute_path_to_epics_base>" > configure/CONFIG_SITE.local
+
+# 2. Build
+make init
+make conf
+make build
+make symlinks
+```
