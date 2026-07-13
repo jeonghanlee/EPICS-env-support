@@ -41,7 +41,7 @@ OS_VERSION:=unknownVER
 endif
 
 ifeq ($(strip $(OS_NAME)),)
-OS_VERSION:=unknownOS
+OS_NAME:=unknownOS
 endif
 
 PATH_NANE_MODULES:=modules
