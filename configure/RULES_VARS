@@ -32,7 +32,7 @@ else
 SRC_VARIABLES:=$(filter $(FILTER)%, $(sort $(filter-out $(VARS_EXCLUDES) VARS_EXCLUDES,$(.VARIABLES))))
 endif
 
-.PHONY : env vars header
+.PHONY : env vars _header
 
 env: vars
 ## Print interesting VARIABLES : also make PRINT.$(EACH_VARIABLE)
