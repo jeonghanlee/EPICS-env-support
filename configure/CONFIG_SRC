@@ -7,11 +7,20 @@ INSTALL_PROGRAM:=$(INSTALL)
 INSTALL_DATA:=$(INSTALL) -m 644
 INSTALL_755:=$(INSTALL) -m 755
 
-# IF INSTALL_LOCATIOIN/.. is not WRITABLE, SUDO and SUDOBASH should be used
+# IF INSTALL_LOCATION_CHECK is not WRITABLE, SUDO and SUDOBASH should be used
 # SUDO_INFO 1 : SUDO is needed (NOT writable)
 # SUDO_INFO 0 : SUDO is not needed
-
-SUDO_INFO = $(shell test -w $(INSTALL_LOCATION_EPICS) 1>&2 2> /dev/null; echo $$?)
+#
+# The path is spelled out here rather than taken from CONFIG_BASE's
+# INSTALL_LOCATION_EPICS: the ifeq below is evaluated while this file is read,
+# and CONFIG is still two includes away from CONFIG_BASE. An empty path turns
+# the test into a one-argument string test that always reports writable, so
+# SUDO stays empty and a hand-run install into a root-owned tree dies on
+# mkdir. Assign immediately so the value cannot drift once CONFIG_BASE
+# arrives. The test is -w, not mkdir -p, which reports success on a directory
+# that already exists and is not writable.
+INSTALL_LOCATION_CHECK:=$(INSTALL_LOCATION)/..
+SUDO_INFO := $(shell test -w "$(INSTALL_LOCATION_CHECK)" 1>&2 2> /dev/null; echo $$?)
 
 SUDO_CMD := $(shell which sudo)
 
