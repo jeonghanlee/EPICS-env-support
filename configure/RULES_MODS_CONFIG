@@ -6,10 +6,12 @@ conf.modules.show: $(patsubst %, conf.%.show, $(SRC_NAMES))
 conf.ADCore:
 	@echo "EPICS_BASE:=$(INSTALL_LOCATION)"                     > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "ASYN:=$(INSTALL_LOCATION_MODS)/asyn"                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
+	@echo "PVXS:=$(INSTALL_LOCATION_MODS)/pvxs"                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/RELEASE.local
 	@echo "CHECK_RELEASE = NO"                                  > $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "PROD_LDFLAGS += -Wl,--enable-new-dtags"             >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_PVA = YES"                                     >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_QSRV = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
+	@echo "WITH_PVXS = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_JASON = YES"                                   >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 	@echo "WITH_HDF5 = YES"                                    >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE
 #	@echo "HDF5_EXTERNAL = YES"                                >> $(TOP)/$(filter $(patsubst conf.%, %, $@)-src, $(SRC_PATH_MODULES))/configure/CONFIG_SITE

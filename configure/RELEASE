@@ -6,8 +6,8 @@ SRC_URL:=https://github.com/areaDetector
 # https://github.com/areaDetector/ADCore
 # 2026-01-27
 SRC_NAME_ADCORE:=ADCore
-SRC_TAG_ADCORE:=72593ed
-SRC_VER_ADCORE:=72593ed
+SRC_TAG_ADCORE:=ee039d2
+SRC_VER_ADCORE:=ee039d2
 
 # https://github.com/areaDetector/ADSimDetector
 # 2025-07-28
