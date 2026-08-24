@@ -5,7 +5,7 @@ Milestone index: 1.3.0
 Canonical path: `docs/milestone-1.3.0.md`
 Canonical branch or ref: master
 Git upstream: origin/master
-Remote tracker: jeonghanlee/EPICS-env-support (no GitHub milestone yet); support-side M39 mirrored in EPICS-env `docs/milestone-1.3.0.md` (M39) and issue jeonghanlee/EPICS-env#66
+Remote tracker: jeonghanlee/EPICS-env-support#5 (open, no GitHub milestone yet); support-side M39 mirrored in EPICS-env `docs/milestone-1.3.0.md` (M39) and issue jeonghanlee/EPICS-env#66
 
 Next session entry point: `docs/milestone-1.3.0.md` M2 - debian13 layer-2 built and verified 2026-08-24 (T1/T2/T3 Pass); in the serial per-OS plan, repeat the build and check_deps on each remaining OS (rocky8, rocky10, ubuntu24, ubuntu26) as its layer-1 becomes ready.
 
