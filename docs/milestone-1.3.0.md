@@ -18,7 +18,7 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - obtain owner acceptance
 | Baseline | M1 | Fix the 1.2.1 -> 1.3.0 delta baseline | Milestone | In progress | No | | Full delta between tag 1.2.1 and release HEAD recorded here and committed; [detail](#m1---fix-the-121---130-delta-baseline) |
 | Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | Blocked | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean; [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
 | Release | M3 | Prepare the 1.3.0 version/ChangeLog/README bump and release-eve records | Milestone | Blocked | No | M1, M2, G2 | Version/ChangeLog/README bump and release-eve records staged; tag and GitHub release remain owner-gated; [detail](#m3---prepare-the-130-versionchangelogreadme-bump-and-release-eve-records) |
-| Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Open | No | | Layer-1 install present and sourceable, exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
+| Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Open | No | | 1.3.0 layer-1 is 5-OS green (build plus RUNPATH/asyn re-verification), then present and sourceable exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
 | Release | G2 | Owner authorization to tag and publish 1.3.0 | External gate | Open | No | | Owner authorizes the annotated tag and the GitHub release; [detail](#g2---owner-authorization-to-tag-and-publish-130) |
 
 ### Decisions
@@ -269,14 +269,18 @@ Status: Open
 
 ##### Summary
 
-The support-layer build (M2) requires an EPICS-env 1.3.0 layer-1 install that
-exposes asyn R4-46. Until that install is present and sourceable on the build
-host, M2 cannot run and stays Blocked.
+The support-layer build (M2) requires a clean EPICS-env 1.3.0 layer-1 baseline.
+The readiness bar is not merely "an install exists": the peer (M40) sets it at
+5-OS green — the 1.3.0 layer-1 built and RUNPATH/asyn re-verified across the
+five OS targets. Wiring plus parse/stage checks alone are not the signal. Until
+the peer signals 5-OS green, M2 cannot run and stays Blocked.
 
 ##### Completion Criteria
 
-- An EPICS-env 1.3.0 layer-1 install is present on the build host.
-- Its `setEpicsEnv.bash` sources cleanly and exposes asyn R4-46.
+- The EPICS-env 1.3.0 layer-1 is 5-OS green: built and RUNPATH/asyn re-verified
+  across the five OS targets (peer M40 signal).
+- The resulting install is present and sourceable on the build host, its
+  `setEpicsEnv.bash` sources cleanly and exposes asyn R4-46.
 
 ##### Verification Results
 
