@@ -76,12 +76,14 @@ Superseded Plan Artifacts: none
 | Label | Layer | Method | Environment | Expected Result |
 | --- | --- | --- | --- | --- |
 | T1 | Baseline audit | `git log --oneline 1.2.1..HEAD` and `git diff 1.2.1..HEAD` on the real repository | Local checkout at HEAD | Exactly one commit (7fe14ee); diff limited to `configure/RELEASE` (ADCore ee039d2) and `configure/RULES_MODS_CONFIG` (PVXS wiring + WITH_PVXS = YES) |
+| T2 | Source presence | Inspect the checked-out ADCore source at ee039d2 for the PVXS plugin | `ADCore-src/` at ee039d24 | ADCore ee039d2 source carries the NDPluginPvxs plugin (the delta's PVXS claim holds at source level) |
 
 ##### Verification Results
 
 | Label | Observed At | Environment | Result | Evidence |
 | --- | --- | --- | --- | --- |
 | T1 | 2026-08-24 | Local checkout, HEAD 7fe14ee | Pass | `git log --oneline 1.2.1..HEAD` -> single line 7fe14ee; `git diff 1.2.1..HEAD` touches only `configure/RELEASE` and `configure/RULES_MODS_CONFIG`; `configure/RELEASE` at HEAD: ADCore ee039d2, ADSimDetector 0ef1305, ADGenICam ba5b9b8, ADVimba R1-5 |
+| T2 | 2026-08-24 | `ADCore-src/` at ee039d24 | Pass | `git -C ADCore-src rev-parse --short HEAD` -> ee039d24; `find ADCore-src -iname '*pvxs*'` lists `ADApp/pluginSrc/NDPluginPvxs.cpp`, `.dbd`, `.h` and `ntndArrayConverterPvxs.{h,cpp}` |
 
 ##### Closure Evidence
 
@@ -280,11 +282,11 @@ host, M2 cannot run and stays Blocked.
 
 | Observed At | Result | Evidence |
 | --- | --- | --- |
-| Not run | Pending | Layer-1 install path and asyn R4-46 presence to be confirmed on the build host |
+| 2026-08-24 | Pending (gate unmet) | Only a 1.2.2 install exists on the build host: `~/epics/1.2.2/debian-13/7.0.10/` (base 7.0.10) with `modules/asyn-4.46.0` (= R4-46). No 1.3.0 layer-1 install present. The required asyn R4-46 is already available in 1.2.2; the awaited condition is the EPICS-env 1.3.0 layer-1 (peer M40: adds qpc @913fad4 and rgamv2 @27fc633 on top of asyn R4-46). |
 
 ##### Closure Evidence
 
-- Pending: confirmed layer-1 install path and sourced environment.
+- Pending: confirmed 1.3.0 layer-1 install path and sourced environment (peer to signal on M40 completion).
 
 #### G2 - Owner authorization to tag and publish 1.3.0
 
