@@ -7,7 +7,7 @@ Canonical branch or ref: master
 Git upstream: origin/master
 Remote tracker: jeonghanlee/EPICS-env-support (no GitHub milestone yet); support-side M39 mirrored in EPICS-env `docs/milestone-1.3.0.md` (M39) and issue jeonghanlee/EPICS-env#66
 
-Next session entry point: `docs/milestone-1.3.0.md` M2 - obtain owner acceptance of the build plan and implementation authority to build the support layer against the EPICS-env 1.3.0 layer-1 install (asyn R4-46).
+Next session entry point: `docs/milestone-1.3.0.md` M2 - debian13 layer-2 built and verified 2026-08-24 (T1/T2/T3 Pass); in the serial per-OS plan, repeat the build and check_deps on each remaining OS (rocky8, rocky10, ubuntu24, ubuntu26) as its layer-1 becomes ready.
 
 ## Milestone
 
@@ -16,7 +16,7 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - obtain owner acceptance
 | Group | ID | Work unit | Type | Status | Ready | Deps | Done when / Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Baseline | M1 | Fix the 1.2.1 -> 1.3.0 delta baseline | Milestone | In progress | No | | Full delta between tag 1.2.1 and release HEAD recorded here and committed; [detail](#m1---fix-the-121---130-delta-baseline) |
-| Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | Blocked | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean; [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
+| Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | In progress | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean, on each OS (debian13 done 2026-08-24; rocky8/rocky10/ubuntu24/ubuntu26 pending); [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
 | Release | M3 | Prepare the 1.3.0 version/ChangeLog/README bump and release-eve records | Milestone | Blocked | No | M1, M2, G2 | Version/ChangeLog/README bump and release-eve records staged; tag and GitHub release remain owner-gated; [detail](#m3---prepare-the-130-versionchangelogreadme-bump-and-release-eve-records) |
 | Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Open | No | | 1.3.0 layer-1 is 5-OS green (build plus RUNPATH/asyn re-verification), then present and sourceable exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
 | Release | G2 | Owner authorization to tag and publish 1.3.0 | External gate | Open | No | | Owner authorizes the annotated tag and the GitHub release; [detail](#g2---owner-authorization-to-tag-and-publish-130) |
@@ -104,7 +104,7 @@ Last Compared: never
 Origin: 1.3.0 / M2
 Identity History: none
 GitHub Issue: none
-Status: Blocked
+Status: In progress
 
 ##### Summary
 
@@ -133,8 +133,11 @@ Out of scope: version/ChangeLog/README bump (M3); any tag or release action.
 
 ##### Dependencies And Decisions
 
-- G1: the EPICS-env 1.3.0 layer-1 install (asyn R4-46) must be available; while
-  G1 is Open this work is Blocked. On G1 completion, resume as Not started.
+- G1: the EPICS-env 1.3.0 layer-1 install (asyn R4-46) must be available. The
+  peer (M40) delivers layer-1 serially per OS; each OS unblocks its own leg of
+  this work. debian13 layer-1 was delivered ready 2026-08-24 (peer 3afb4c3 CI
+  green, check_deps clean), so the debian13 leg ran. Legs for rocky8, rocky10,
+  ubuntu24, and ubuntu26 remain Blocked until each OS's layer-1 is ready.
 - M1: build against the fixed baseline.
 
 ##### Implementation Plan
@@ -163,13 +166,14 @@ Superseded Plan Artifacts: none
 
 | Label | Observed At | Environment | Result | Evidence |
 | --- | --- | --- | --- | --- |
-| T1 | Not run | EPICS-env 1.3.0 layer-1 | Pending | none |
-| T2 | Not run | EPICS-env 1.3.0 layer-1 | Pending | none |
-| T3 | Not run | EPICS-env 1.3.0 layer-1 | Pending | none |
+| T1 | 2026-08-24 | debian13 VM (192.168.122.20), layer-1 /opt/epics/1.2.2/debian-13/7.0.10 | Pass (debian13) | Build script exit 0 (ALL_DONE); four modules installed with unversioned symlinks under .../modules: ADCore-ee039d2, ADSimDetector-0ef1305, ADGenICam-ba5b9b8, ADVimba-R1-5 |
+| T2 | 2026-08-24 | debian13 VM, layer-1 /opt/epics/1.2.2/debian-13/7.0.10 | Pass (debian13) | `ldd .../modules/ADCore-ee039d2/lib/linux-x86_64/libNDPlugin.so`: libasyn.so resolves via $ORIGIN to .../asyn (layer-1 R4-46); libpvxs.so.1.5 and libpvxsIoc.so.1.5 to layer-1 pvxs-1.5.2 |
+| T3 | 2026-08-24 | debian13 VM, layer-1 /opt/epics/1.2.2/debian-13/7.0.10 | Pass (debian13) | `sudo bash check_deps.bash /opt/epics/1.2.2/debian-13/7.0.10` exit 0; BIN RPATH 0/150, ABSPATH 0/150; SO RPATH 0/78, ABSPATH 0/78, LOSTORG 0/78 (system-path NOTE lines benign) |
 
 ##### Closure Evidence
 
-- Pending: build/link/check_deps results, and the EPICS-env M34.T2 cross-reference.
+- debian13 leg 2026-08-24: T1/T2/T3 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0). Serves as debian13 support-side evidence for EPICS-env M34.T2.
+- Pending: the same build/link/check_deps evidence on rocky8, rocky10, ubuntu24, ubuntu26 as each OS's layer-1 becomes ready.
 
 ##### GitHub Projection
 
