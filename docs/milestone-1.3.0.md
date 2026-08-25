@@ -179,6 +179,7 @@ Superseded Plan Artifacts: none
 
 - debian13 leg 2026-08-24: T1/T2/T3 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0). Serves as debian13 support-side evidence for EPICS-env M34.T2.
 - rocky8 leg 2026-08-24: T4/T5/T6 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/rocky-8.10/7.0.10.
+- rocky8 downstream corroboration 2026-08-24: site layer-3 RV2 passed on this layer-2 tree (site tip f69438f; siteApps/unidrv/bpmSup/eventGeneratorSup build exit 0; check_deps rc=0 against /opt/epics/1.3.0/rocky-8.10/7.0.10) — reported by the EPICS-env peer. Confirms the layer-2 build holds under layer-3.
 - Pending: the same build/link/check_deps evidence on rocky10, ubuntu24, ubuntu26 as each OS's layer-1 becomes ready.
 
 ##### GitHub Projection
