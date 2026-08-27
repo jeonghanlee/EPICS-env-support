@@ -180,6 +180,9 @@ Superseded Plan Artifacts: none
 | T10 | 2026-08-25 | rocky10 VM (192.168.122.130), layer-1 /opt/epics/1.3.0/rocky-10.2/7.0.10 | Pass (rocky10) | Build script exit 0 (ALL_DONE); four modules installed under .../modules: ADCore-ee039d2, ADSimDetector-0ef1305, ADGenICam-ba5b9b8, ADVimba-R1-5 |
 | T11 | 2026-08-25 | rocky10 VM, layer-1 /opt/epics/1.3.0/rocky-10.2/7.0.10 | Pass (rocky10) | `ldd .../modules/ADCore/lib/linux-x86_64/libNDPlugin.so`: libasyn.so resolves via $ORIGIN to .../asyn (layer-1 R4-46); libpvxs.so.1.5 and libpvxsIoc.so.1.5 to layer-1 pvxs-1.5 |
 | T12 | 2026-08-25 | rocky10 VM, layer-1 /opt/epics/1.3.0/rocky-10.2/7.0.10 | Pass (rocky10) | `sudo bash check_deps.bash /opt/epics/1.3.0/rocky-10.2/7.0.10` exit 0; BIN RPATH 0/150, ABSPATH 0/150; SO RPATH 0/78, ABSPATH 0/78, LOSTORG 0/78 |
+| T13 | 2026-08-25 | ubuntu26 VM (192.168.122.30), layer-1 /opt/epics/1.3.0/ubuntu-26.04/7.0.10 | Pass (ubuntu26) | Build script exit 0 (ALL_DONE); four modules installed under .../modules: ADCore-ee039d2, ADSimDetector-0ef1305, ADGenICam-ba5b9b8, ADVimba-R1-5 |
+| T14 | 2026-08-25 | ubuntu26 VM, layer-1 /opt/epics/1.3.0/ubuntu-26.04/7.0.10 | Pass (ubuntu26) | `ldd .../modules/ADCore/lib/linux-x86_64/libNDPlugin.so`: libasyn.so resolves via $ORIGIN to .../asyn (layer-1 R4-46); libpvxs.so.1.5 and libpvxsIoc.so.1.5 to layer-1 pvxs-1.5 |
+| T15 | 2026-08-25 | ubuntu26 VM, layer-1 /opt/epics/1.3.0/ubuntu-26.04/7.0.10 | Pass (ubuntu26) | `sudo bash check_deps.bash /opt/epics/1.3.0/ubuntu-26.04/7.0.10` exit 0; BIN RPATH 0/150, ABSPATH 0/150; SO RPATH 0/78, ABSPATH 0/78, LOSTORG 0/78 |
 
 ##### Closure Evidence
 
@@ -188,6 +191,7 @@ Superseded Plan Artifacts: none
 - rocky8 downstream corroboration 2026-08-24: site layer-3 RV2 passed on this layer-2 tree (site tip f69438f; siteApps/unidrv/bpmSup/eventGeneratorSup build exit 0; check_deps rc=0 against /opt/epics/1.3.0/rocky-8.10/7.0.10) — reported by the EPICS-env peer. Confirms the layer-2 build holds under layer-3.
 - ubuntu24 leg 2026-08-24: T7/T8/T9 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/ubuntu-24.04/7.0.10. Public OS: layers 1+2 only, no layer-3.
 - rocky10 leg 2026-08-25: T10/T11/T12 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/rocky-10.2/7.0.10. Public OS: layers 1+2; site rocky10 coverage test to follow via the EPICS-env peer.
+- ubuntu26 leg 2026-08-25: T13/T14/T15 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/ubuntu-26.04/7.0.10. Public OS: layers 1+2; ubuntu26 layer-1 was unblocked after the cloud-provision resolute proxy-contract fix.
 - Pending: the same build/link/check_deps evidence on rocky10, ubuntu24, ubuntu26 as each OS's layer-1 becomes ready.
 
 ##### GitHub Projection
