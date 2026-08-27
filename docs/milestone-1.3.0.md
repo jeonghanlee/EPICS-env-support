@@ -7,7 +7,7 @@ Canonical branch or ref: master
 Git upstream: origin/master
 Remote tracker: jeonghanlee/EPICS-env-support#5 (open, no GitHub milestone yet); support-side M39 mirrored in EPICS-env `docs/milestone-1.3.0.md` (M39) and issue jeonghanlee/EPICS-env#66
 
-Next session entry point: `docs/milestone-1.3.0.md` M2 - debian13 and rocky8 layer-2 built and verified 2026-08-24 (debian13 T1/T2/T3, rocky8 T4/T5/T6 Pass); in the serial per-OS plan, repeat the build and check_deps on each remaining OS (rocky10, ubuntu24, ubuntu26) as its layer-1 becomes ready.
+Next session entry point: `docs/milestone-1.3.0.md` M2 - all five OS legs built and verified 2026-08-25 (debian13 T1-T3, rocky8 T4-T6, ubuntu24 T7-T9, rocky10 T10-T12, ubuntu26 T13-T15 Pass); M1, M2, and G1 are Complete. Next is M3 (version/ChangeLog/README bump), Blocked on G2 owner authorization.
 
 ## Milestone
 
@@ -15,10 +15,10 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - debian13 and rocky8 lay
 
 | Group | ID | Work unit | Type | Status | Ready | Deps | Done when / Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Baseline | M1 | Fix the 1.2.1 -> 1.3.0 delta baseline | Milestone | In progress | No | | Full delta between tag 1.2.1 and release HEAD recorded here and committed; [detail](#m1---fix-the-121---130-delta-baseline) |
-| Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | In progress | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean, on each OS (debian13, rocky8 done 2026-08-24; rocky10/ubuntu24/ubuntu26 pending); [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
+| Baseline | M1 | Fix the 1.2.1 -> 1.3.0 delta baseline | Milestone | Complete | No | | Full delta between tag 1.2.1 and release HEAD recorded here and committed; [detail](#m1---fix-the-121---130-delta-baseline) |
+| Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | Complete | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean, on each OS (all five green: debian13, rocky8, ubuntu24 2026-08-24; rocky10, ubuntu26 2026-08-25); [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
 | Release | M3 | Prepare the 1.3.0 version/ChangeLog/README bump and release-eve records | Milestone | Blocked | No | M1, M2, G2 | Version/ChangeLog/README bump and release-eve records staged; tag and GitHub release remain owner-gated; [detail](#m3---prepare-the-130-versionchangelogreadme-bump-and-release-eve-records) |
-| Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Open | No | | 1.3.0 layer-1 is 5-OS green (build plus RUNPATH/asyn re-verification), then present and sourceable exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
+| Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Complete | No | | 1.3.0 layer-1 is 5-OS green (build plus RUNPATH/asyn re-verification), then present and sourceable exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
 | Release | G2 | Owner authorization to tag and publish 1.3.0 | External gate | Open | No | | Owner authorizes the annotated tag and the GitHub release; [detail](#g2---owner-authorization-to-tag-and-publish-130) |
 
 ### Decisions
@@ -34,7 +34,7 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - debian13 and rocky8 lay
 Origin: 1.3.0 / M1
 Identity History: none
 GitHub Issue: none
-Status: In progress
+Status: Complete
 
 ##### Summary
 
@@ -104,7 +104,7 @@ Last Compared: never
 Origin: 1.3.0 / M2
 Identity History: none
 GitHub Issue: none
-Status: In progress
+Status: Complete
 
 ##### Summary
 
@@ -138,8 +138,12 @@ Out of scope: version/ChangeLog/README bump (M3); any tag or release action.
   this work. debian13 layer-1 was delivered ready 2026-08-24 (peer 3afb4c3 CI
   green, check_deps clean), so the debian13 leg ran; rocky8 layer-1 was
   delivered ready 2026-08-24 (peer gate check_deps clean) and the rocky8 leg
-  ran. Legs for rocky10, ubuntu24, and ubuntu26 remain Blocked until each
-  OS's layer-1 is ready.
+  ran; ubuntu24 layer-1 was delivered ready 2026-08-24 (peer gate check_deps
+  clean) and the ubuntu24 leg ran (public OS, layers 1+2 only); rocky10
+  layer-1 was delivered ready 2026-08-25 (peer gate check_deps clean) and the
+  rocky10 leg ran; ubuntu26 layer-1 was delivered ready 2026-08-25 after the
+  cloud-provision resolute proxy-contract fix, and the ubuntu26 leg ran. All
+  five OS layer-1 installs are now green, so G1 is satisfied.
 - M1: build against the fixed baseline.
 
 ##### Implementation Plan
@@ -192,7 +196,7 @@ Superseded Plan Artifacts: none
 - ubuntu24 leg 2026-08-24: T7/T8/T9 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/ubuntu-24.04/7.0.10. Public OS: layers 1+2 only, no layer-3.
 - rocky10 leg 2026-08-25: T10/T11/T12 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/rocky-10.2/7.0.10. Public OS: layers 1+2; site rocky10 coverage test to follow via the EPICS-env peer.
 - ubuntu26 leg 2026-08-25: T13/T14/T15 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/ubuntu-26.04/7.0.10. Public OS: layers 1+2; ubuntu26 layer-1 was unblocked after the cloud-provision resolute proxy-contract fix.
-- Pending: the same build/link/check_deps evidence on rocky10, ubuntu24, ubuntu26 as each OS's layer-1 becomes ready.
+- All five OS legs green 2026-08-25: debian13 (T1-T3), rocky8 (T4-T6), ubuntu24 (T7-T9), rocky10 (T10-T12), ubuntu26 (T13-T15) — four modules build, link the layer-1 asyn (R4-46) and pvxs-1.5 via $ORIGIN, and check_deps exit 0 on every OS.
 
 ##### GitHub Projection
 
@@ -288,7 +292,7 @@ Last Compared: never
 
 Origin: 1.3.0 / G1
 GitHub Issue: none
-Status: Open
+Status: Complete
 
 ##### Summary
 
