@@ -7,7 +7,7 @@ Canonical branch or ref: master
 Git upstream: origin/master
 Remote tracker: jeonghanlee/EPICS-env-support#5 (open, no GitHub milestone yet); support-side M39 mirrored in EPICS-env `docs/milestone-1.3.0.md` (M39) and issue jeonghanlee/EPICS-env#66
 
-Next session entry point: `docs/milestone-1.3.0.md` M2 - all five OS legs built and verified 2026-08-25 (debian13 T1-T3, rocky8 T4-T6, ubuntu24 T7-T9, rocky10 T10-T12, ubuntu26 T13-T15 Pass); M1, M2, and G1 are Complete. Next is M3 (version/ChangeLog/README bump), Blocked on G2 owner authorization.
+Next session entry point: RELEASED 2026-08-28 as tag 1.3.0 (GitHub release https://github.com/jeonghanlee/EPICS-env-support/releases/tag/1.3.0). M1, M2, M3, G1, and G2 are all Complete; the next development cycle is not yet opened.
 
 ## Milestone
 
@@ -17,9 +17,9 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - all five OS legs built 
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Baseline | M1 | Fix the 1.2.1 -> 1.3.0 delta baseline | Milestone | Complete | No | | Full delta between tag 1.2.1 and release HEAD recorded here and committed; [detail](#m1---fix-the-121---130-delta-baseline) |
 | Build | M2 | Build the support layer against EPICS-env 1.3.0 layer-1 (asyn R4-46) | Milestone | Complete | No | G1, M1 | ADCore, ADSimDetector, ADGenICam, ADVimba build and link against R4-46; check_deps RPATH/ABSPATH clean, on each OS (all five green: debian13, rocky8, ubuntu24 2026-08-24; rocky10, ubuntu26 2026-08-25); [detail](#m2---build-the-support-layer-against-epics-env-130-layer-1-asyn-r4-46) |
-| Release | M3 | Prepare the 1.3.0 version/ChangeLog/README bump and release-eve records | Milestone | Blocked | No | M1, M2, G2 | Version/ChangeLog/README bump and release-eve records staged; tag and GitHub release remain owner-gated; [detail](#m3---prepare-the-130-versionchangelogreadme-bump-and-release-eve-records) |
+| Release | M3 | Prepare the 1.3.0 version/ChangeLog/README bump and release-eve records | Milestone | Complete | No | M1, M2, G2 | D2 tag-only (no version file or ChangeLog); release notes prepared and the tag/release executed 2026-08-28; [detail](#m3---prepare-the-130-versionchangelogreadme-bump-and-release-eve-records) |
 | Build | G1 | EPICS-env 1.3.0 layer-1 install available (asyn R4-46) | External gate | Complete | No | | 1.3.0 layer-1 is 5-OS green (build plus RUNPATH/asyn re-verification), then present and sourceable exposing asyn R4-46; [detail](#g1---epics-env-130-layer-1-install-available-asyn-r4-46) |
-| Release | G2 | Owner authorization to tag and publish 1.3.0 | External gate | Open | No | | Owner authorizes the annotated tag and the GitHub release; [detail](#g2---owner-authorization-to-tag-and-publish-130) |
+| Release | G2 | Owner authorization to tag and publish 1.3.0 | External gate | Complete | No | | Owner authorized 2026-08-28; merge 30308f7, annotated tag 1.3.0, GitHub release published; [detail](#g2---owner-authorization-to-tag-and-publish-130) |
 
 ### Decisions
 
@@ -215,7 +215,7 @@ Last Compared: never
 Origin: 1.3.0 / M3
 Identity History: none
 GitHub Issue: none
-Status: Blocked
+Status: Complete
 
 ##### Summary
 
@@ -273,11 +273,11 @@ Superseded Plan Artifacts: none
 
 | Label | Observed At | Environment | Result | Evidence |
 | --- | --- | --- | --- | --- |
-| T1 | Not run | Local checkout | Pending | none |
+| T1 | 2026-08-28 | Local checkout | Pass | D2 tag-only: no version/ChangeLog/README bump needed; release notes reviewed |
 
 ##### Closure Evidence
 
-- Pending: staged bump, release-eve records, and the owner authorization record (G2).
+- D2 tag-only: no version file or ChangeLog introduced; release notes prepared in work/release-notes-1.3.0.md; the 1.3.0 tag and GitHub release executed 2026-08-28 under owner authorization (G2).
 
 ##### GitHub Projection
 
@@ -324,7 +324,7 @@ the peer signals 5-OS green, M2 cannot run and stays Blocked.
 
 Origin: 1.3.0 / G2
 GitHub Issue: none
-Status: Open
+Status: Complete
 
 ##### Summary
 
@@ -340,11 +340,11 @@ release is created until the owner authorizes the previewed release sequence.
 
 | Observed At | Result | Evidence |
 | --- | --- | --- |
-| Not run | Pending | Owner authorization decision to be recorded here |
+| 2026-08-28 | Complete | Owner authorized the previewed sequence; --no-ff merge 30308f7, annotated tag 1.3.0, GitHub release published |
 
 ##### Closure Evidence
 
-- Pending: owner authorization record and the resulting tag/release references.
+- Owner authorized 2026-08-28: executed the previewed sequence - --no-ff merge 30308f7 (Merge release-1.3.0: PVXS support release), annotated tag 1.3.0 -> 30308f7, GitHub release https://github.com/jeonghanlee/EPICS-env-support/releases/tag/1.3.0. No GitHub milestone existed; no two-back release branch to delete.
 
 ## Backlog
 
