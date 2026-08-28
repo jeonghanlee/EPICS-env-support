@@ -26,6 +26,7 @@ Next session entry point: `docs/milestone-1.3.0.md` M2 - all five OS legs built 
 | ID | Decision | Decision Date |
 | --- | --- | --- |
 | D1 | The 1.3.0 baseline is tag 1.2.1 plus exactly one commit, 7fe14ee (ADCore 72593ed -> ee039d2, WITH_PVXS = YES, PVXS RELEASE.local wiring); ADSimDetector, ADGenICam, and ADVimba are unchanged from 1.2.1 | 2026-08-24 |
+| D2 | 1.3.0 keeps tag-only versioning: no version file or CHANGELOG.md is introduced; the 1.3.0 change summary is carried in the GitHub release notes body, consistent with the 1.1.1, 1.2.0, and 1.2.1 releases | 2026-08-27 |
 
 ### Milestone Details
 
@@ -245,10 +246,9 @@ closing any milestone. All of these are owner-gated (G2).
 - M2: the build/link/check_deps evidence must pass before release-eve records.
 - G2: owner authorization gates the tag and GitHub release; while G2 is Open the
   tag/publish sub-step is Blocked.
-- Open question (undecided): this repository has no version file or ChangeLog
-  today; version is tracked only by git tag. Whether to introduce a version
-  file and/or ChangeLog, or keep tag-only versioning, is an owner decision to be
-  recorded as a D row before this work executes.
+- D2 (2026-08-27): tag-only versioning kept for 1.3.0 - no version file or
+  ChangeLog introduced; the 1.3.0 change summary lives in the GitHub release
+  notes body. Resolves the prior open question.
 
 ##### Implementation Plan
 
