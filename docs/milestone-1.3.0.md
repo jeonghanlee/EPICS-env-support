@@ -197,6 +197,7 @@ Superseded Plan Artifacts: none
 - rocky10 leg 2026-08-25: T10/T11/T12 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/rocky-10.2/7.0.10. Public OS: layers 1+2; site rocky10 coverage test to follow via the EPICS-env peer.
 - ubuntu26 leg 2026-08-25: T13/T14/T15 Pass (build, layer-1 asyn+pvxs linkage, check_deps exit 0) on layer-1 1.3.0/ubuntu-26.04/7.0.10. Public OS: layers 1+2; ubuntu26 layer-1 was unblocked after the cloud-provision resolute proxy-contract fix.
 - All five OS legs green 2026-08-25: debian13 (T1-T3), rocky8 (T4-T6), ubuntu24 (T7-T9), rocky10 (T10-T12), ubuntu26 (T13-T15) — four modules build, link the layer-1 asyn (R4-46) and pvxs-1.5 via $ORIGIN, and check_deps exit 0 on every OS.
+- Integrated-run corroboration 2026-08-27: EPICS-env's release pipeline (layer-1 release-1.3.0 @ 991e330, verified 5-OS) rebuilt and verified this layer-2 at support master 7fe14ee within its own run (epics_support operator) on all five OS - 78-module full-stack tree, AD family gz-clean (-g0 -gz=zlib), check_deps EXIT 0 - independent of the manual per-OS legs above. Confirms G1 (layer-1-ready) satisfied and reconfirms the support-side build/check_deps evidence.
 
 ##### GitHub Projection
 
